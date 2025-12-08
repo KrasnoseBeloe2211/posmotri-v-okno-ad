@@ -1,21 +1,11 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  block-size: 100%;
-}
-
-.page {
-  inline-size: 1200px;
-  block-size: 100%;
-  margin: auto;
-  color: #fff;
-  font-family: 'Fira Sans Condensed', sans-serif;
-  font-size: 18px;
-  background-color: #1b1919;
+	block-size: 100%;
 }
 
 h1,
@@ -28,24 +18,292 @@ ol,
 li,
 blockquote,
 fieldset {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 ul,
 ol {
-  list-style: none;
+	list-style: none;
 }
 
 /* Кастомный скроллбар */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+	width: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgb(217 217 217 / 10%);
+	background: rgb(217 217 217 / 10%);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #D9D9D9;
+	background-color: #d9d9d9;
+}
+
+.page {
+	inline-size: 1200px;
+	block-size: 100%;
+	margin: auto;
+	color: #fff;
+	font-family: 'Fira Sans Condensed', sans-serif;
+	font-size: 18px;
+	background-color: #1b1919;
+	display: grid;
+	/* для расположения контент в центре (сокращение для align-items + justify-items) */
+	place-items: center center;
+}
+
+.content {
+	display: grid;
+	/* Выравнивает грид элементы по нижнему краю ячеек */
+	align-items: end;
+	/* отступ между элементами */
+	gap: 30px;
+	/* созд. две колоник одна под видео вторая под выбор городов */
+	grid-template-columns: 711px 399px;
+}
+
+.search-form {
+	/* растягиваем элементы по ширине блока */
+	display: flex;
+	justify-content: space-between;
+	/* прижимаем элементы флексбокса к началу контейнера */
+	align-items: flex-start;
+}
+
+.content__list-container {
+	/* вертикальный скрол + установили высоту для блока */
+	overflow-y: scroll;
+	height: 298px;
+}
+
+.content__details {
+	/* grid-area: content__details; */
+	/* расстянули на всю ширину и высоту */
+	display: flex;
+	/* расположили элементы секции в строки */
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	/* отступ карточек от заголовка */
+	gap: 26px;
+}
+
+.result__video-container {
+	/* установка высоты ширины и нижнего отступа у видео */
+	width: 711px;
+	height: 386px;
+	margin-bottom: 16px;
+}
+
+.result__video {
+	/* растянули видео на весь экран и обрезали лишниее */
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-position: center;
+}
+
+.content__list-item {
+	/* отступы между картинками в скроле (с gap не получается, не работает) */
+	margin-block-end: 30px;
+	padding-left: 3px;
+}
+
+.content__video-card {
+	/* расположили в строку и перемести начало к началу контейнера по доп. оси */
+	display: flex;
+	align-items: flex-start;
+}
+
+.content__video-card-thumbnail {
+	width: 194px;
+	height: 103px;
+	/* cover чтоб закрывало весь элемент */
+	object-fit: cover;
+	object-position: center;
+}
+
+.content__video-card-description-container {
+	flex-grow: 1;
+	display: flex;
+	/* нужно чтобы подпись к городу вставала снизу */
+	flex-direction: column;
+	gap: 6px;
+}
+
+.search-form__fieldset-title {
+	color: #fff;
+	font-size: 18px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 100%;
+}
+
+.title {
+	color: #fff;
+	font-family: Oswald, sans-serif;
+	font-weight: 700;
+	font-size: 75px;
+	line-height: 94%;
+	text-transform: uppercase;
+}
+
+.content__accent {
+	color: #545050;
+}
+
+.content__card-link {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+
+.content__video-card-title {
+	font-family: Oswald, sans-serif;
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 100%;
+	text-transform: uppercase;
+	font-style: normal;
+	/* для корректного отображения при переполнении */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.content__video-card-description {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 0.9;
+	/* для корректного отображения при переполнении */
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.visually-hidden {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.search-form__checkbox-list {
+	display: flex;
+	gap: 15px;
+}
+
+.search-form__fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	border: none;
+}
+
+.search-form__label {
+	display: flex;
+	width: fit-content;
+	cursor: pointer;
+}
+
+.search-form__textfield {
+	/* оставил рамки сверху и снизу */
+	border: none;
+	border-block-start: 1px solid #fff;
+	border-block-end: 1px solid #fff;
+	color: rgb(255 255 255 / 0.7);
+	appearance: none;
+	font-family: 'Fira Sans Condensed', sans-serif;
+	background: transparent;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	min-inline-size: 225px;
+	max-inline-size: 225px;
+}
+
+.search-form__label:has(:focus-visible) {
+	outline-offset: 1px;
+	outline: 1px solid #fff;
+}
+
+.search-form__pseudo-checkbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 19px;
+	width: 19px;
+	border: 1px solid #fff;
+}
+
+.search-form__checkbox-list {
+	display: flex;
+	gap: 15px;
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+	content: '';
+	background: #fff;
+	height: 15px;
+	width: 15px;
+}
+
+.search-form__label:hover .search-form__label-text,
+.button:hover,
+.content__card-link:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.button {
+	background: transparent;
+	border: 1px solid #fff;
+	font-family: 'Fira Sans Condensed', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	cursor: pointer;
+}
+
+.search-form__submit-button {
+	align-items: flex-end;
+	width: 194px;
+}
+
+.more-button {
+	width: 100%;
+}
+
+.button:focus,
+.content__card-link:focus {
+	outline: none;
+}
+
+.button:active {
+	background: #545050;
+	text-decoration: none;
+}
+
+.content__video-card-thumbnail {
+	width: 194px;
+	height: 103px;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+}
+
+.content__card-link_current {
+	background: #545050;
+}
+
+.result__video-container,
+.content__list-container {
+	position: relative;
 }
