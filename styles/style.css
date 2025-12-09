@@ -178,7 +178,7 @@ ol {
 	line-height: 0.9;
 	/* для корректного отображения при переполнении */
 	display: -webkit-box;
-	-webkit-line-clamp: 1;
+	line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
